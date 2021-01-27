@@ -9,6 +9,7 @@ from .permissions import UpdateOwnProfile
 from .models import UserProfile
 from .serializers import UserProfileSerializer
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework import filters
 
 
 class HelloApiView(APIView):
@@ -109,3 +110,5 @@ class UserProfileViewSet(viewsets.ModelViewSet):
     serializer_class = UserProfileSerializer
     authentication_classes = (TokenAuthentication,)
     permission_classes = (UpdateOwnProfile,)
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('name','email',)
